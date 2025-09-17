@@ -1,0 +1,21 @@
+{% doc %}
+  This snippet is used to render a badge with an icon and text.
+
+  It is included in the following files
+  - product-card.liquid
+
+  @param {string} text - The text to display inside the badge
+  @param {string} icon - The name of the icon to display (from Material Symbols)
+  @param {string} color - The background color of the badge (hex code or color name)
+  @param {string} [class] - Additional classes to add to the badge element
+
+  USAGE EXAMPLE:
+  {% render 'badge', text: 'badge', class: 'product-badge', color: '#FFF', icon: 'heart' %}
+{% enddoc %}
+
+<span class="badge {{ class }}" style="background-color: {{ color }};">
+  <span class="badge--icon">
+    {% render 'icons', icon: icon %}
+  </span>
+  <span class="badge--text">{{ text }}</span>
+</span>

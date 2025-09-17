@@ -1,0 +1,218 @@
+/* 
+  COLLECTION PAGE STYLES 
+
+  Note: On a large project some of these styles would be used in other files.
+  Classes used for elements such as product tiles, badges, price etc. would be used
+  in other .css files as they're likely going to be featured on other pages outside of the collection page. 
+  I've just kept them here for simplicity.
+*/
+
+/* collection header */
+.collection-header {
+  display: flex;
+  justify-content: center;
+  padding: 20px 62px;
+
+  @media only screen and (min-width: 768px) {
+    padding: 30px 62px;
+  }
+}
+
+.collection-header--title {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  line-height: 150%;
+  font-family: Montserrat;
+}
+
+.collection-header--description {
+  padding: 12px 0;
+  font-size: 16px;
+}
+
+
+
+/* collection grid */
+.collection-grid {
+  padding: 0 20px;
+  @media only screen and (min-width: 768px) {
+    padding: 32px 64px;
+  }
+}
+
+.collection-grid--inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  @media only screen and (min-width: 768px) {
+    gap: 24px;
+  }
+}
+
+/* product tile */
+.product-tile {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  /* large mobile phone viewport */
+  @media only screen and (min-width: 480px) {
+    width: calc(50% - 20px);
+  }
+  /* tablet viewport */
+  @media only screen and (min-width: 768px) {
+    width: calc(33.3333% - 20px);
+  }
+  /* desktop viewport */
+  @media only screen and (min-width: 1280px) {
+    width: calc(25% - 24px);
+  }
+}
+
+/* product tile (header) */
+.product-tile--header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+}
+
+.product-tile--badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.product-tile--badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  gap: 8px;
+  border-radius: 6px;
+}
+
+.product-tile--badge .badge--icon {
+  height: 14px;
+  width: 14px;
+}
+
+.product-tile--badge .badge--text {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0px;
+}
+
+.product-tile--wishlist {
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  color: #8F9296;
+}
+
+.product-tile--image-link {
+  display: flex;
+}
+
+/* product tile (main) */
+.product-tile--featured-image {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+  max-height: 278px;
+}
+
+.product-tile--title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  margin-top: 20px;
+}
+
+.product-tile--variant-title {
+  font-weight: 400;
+  color: #5D5F63;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0px;
+}
+
+/* product tile (footer) */
+.product-tile--footer {
+  border-top: 1px solid #DEDEDE;
+  padding: 20px 0px;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 8px;
+  row-gap: 16px;
+}
+
+.product-tile--price {
+  font-weight: 700;
+  line-height: 120%;
+  font-size: 22px;
+  letter-spacing: 0px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 2px;
+}
+
+.product-tile--price .price--sold-out-message {
+  color: #5D5F63;
+  text-transform: uppercase;
+}
+
+.product-tile--price .price--original-price {
+  text-decoration: line-through;
+  color: #5D5F63;
+}
+
+.product-tile--quantity {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.product-tile--quantity .minus, .product-tile--quantity .plus {
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+  background: #E9ECF0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.product-tile--quantity input[type="number"] {
+  font-weight: 700;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid #CCD0D6;
+  text-align: center;
+}
+
+.product-tile--quantity .minus .icon {
+  display: flex;
+  height: 12px;
+  width: 12px;
+}
+
+.product-tile--quantity .plus .icon {
+  display: flex;
+  height: 20px;
+  width: 20px;
+}

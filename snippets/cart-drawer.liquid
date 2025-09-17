@@ -1,0 +1,90 @@
+{% doc %}
+  This snippet is used to render the cart drawer
+
+  It is included in the following files
+  - theme.liquid
+
+  USAGE EXAMPLE:
+  {% render 'cart-drawer' %}
+{% enddoc %}
+
+{% liquid 
+  comment
+    Used to determine if the cart is empty. I would usually use the cart.empty? expression directly
+    however I wanted to ensure items were shown in the cart even if the cart was empty for testing purposes.
+  endcomment
+  if cart.empty?
+    assign cart_empty = true
+  endif
+  assign cart_empty = false
+%}
+
+<cart-drawer 
+  type="cart-drawer" 
+  class="cart-drawer"
+>
+  {% comment %} overlay {% endcomment %}
+  <div class="cart-drawer--overlay"></div>
+
+  <div class="cart-drawer--inner" style="background-color: {{ settings.cart_drawer_background_color }};">
+
+    {% comment %} close button {% endcomment %}
+    <span class="cart-drawer--close-button">
+      {% render 'icons', icon: 'cross' %}
+    </span>
+
+    {% comment %} cart drawer header {% endcomment %}
+    <div class="cart-drawer--header">
+      <h2 class="cart-drawer--heading">
+        {% if settings.cart_drawer_heading != blank %}
+          {{ settings.cart_drawer_heading }}
+        {% else %}
+          {{ 'Cart' }}
+        {% endif %}
+      </h2>
+
+      {% comment %} clear cart button - would usually use JS to set the cart to empty here {% endcomment %}
+      {% unless cart_empty %}
+        <span class="cart-drawer--clear-button">{{ 'Clear all' }}</span>
+      {% endunless %}
+    </div>
+
+    {% comment %} cart drawer items {% endcomment %}
+    <div class="cart-drawer--items">
+      {% if cart_empty %}
+        <p class="cart-drawer--empty-message">
+          {{ 'Your cart is currently empty.' }}
+        </p>
+        {% comment %} would typically use some sort of upsell here in place of the link {% endcomment %}
+        <a href="{{ routes.collections_url }}" class="cart-drawer--continue-shopping">
+          {{ 'Continue shopping' }}
+        </a>
+      {% else %}
+        {% render 'cart-items' %}
+      {% endif %}
+    </div>
+    {% comment %} cart drawer footer {% endcomment %}
+    {% unless cart_empty %}
+      <div class="cart-drawer--footer">
+        <div class="cart-drawer--footer-header">
+          <span class="cart-drawer--item-count"> {{ cart.item_count | append: ' items' }}</span>
+          <span class="cart-drawer--total">
+            {{ cart.total_price | money }}
+          </span>
+        </div>
+
+        {% comment %} Rewards button - this would usually be rendered via an app such as loyalty lion so this would usually come in the form of an embed or snippet provided by the app {% endcomment %}
+        <button class="cart-drawer--rewards-button">
+          {{ 'Earn 20 points with this order' }}
+        </button>
+
+        {% comment %} checkout button {% endcomment %}
+        <a href="/checkout" class="cart-drawer--checkout-button">
+          {{ 'Checkout now' }}
+        </a>
+      </div>
+    {% endunless %}
+  </div>
+</cart-drawer>
+
+{{ 'cart-drawer.css' | asset_url | stylesheet_tag }}

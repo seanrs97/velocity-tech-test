@@ -1,0 +1,53 @@
+{% doc %}
+  This snippet is used to render the price of a product or variant.
+
+  It is included in the following files
+  - product-card.liquid
+
+  @param {object} product - The product object
+  @param {string} [class] - Additional classes to add to the price element
+
+  USAGE EXAMPLE:
+  {% render 'price', product: product, class: 'product-image' %}
+{% enddoc %}
+
+{% liquid
+  assign compare_at_price = product.compare_at_price 
+  assign price = product.price
+  assign available = product.available
+
+  comment
+    determine if the product is available
+  endcomment
+  if available == false
+    assign sold_out = true
+  endif
+
+  comment
+    detemine if the product is on sale
+  endcomment
+  if compare_at_price > price
+    assign on_sale = true
+  endif
+%}
+
+<div 
+  class="price {{ class }} 
+  {% if sold_out %} sold-out{% endif %}
+  {% if on_sale %} sale{% endif %}"
+>
+  {% if sold_out %}
+    <span class="price--sold-out-message">
+      {{ 'sold out' }}
+    </span>
+  {% else %}
+    {% if on_sale %}
+      <span class="price--original-price">
+        {{ compare_at_price | money }}
+      </span>
+    {% endif %}
+    <span class="price--current-price">
+      {{ price | money }}
+    </span>
+  {% endif %}
+</div>

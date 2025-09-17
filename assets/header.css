@@ -1,0 +1,65 @@
+/* 
+  HEADER PAGE STYLES
+*/
+
+#shopify-section-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.header--container {
+  padding: 18px 28px;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header--logo {
+  object-fit: contain;
+  max-width: 133px;
+}
+
+.header--logo-backup {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 150%;
+  /* I've gone against the design slightly here to ensure the text fits on mobile without going offscreen */
+  letter-spacing: 8px;
+  @media only screen and (min-width: 768px) {
+    letter-spacing: 20px;
+  }
+}
+
+.header--icons-container {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.header--icons-container .icon {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  color: #FFF;
+  position: relative;
+  cursor: pointer;
+}
+
+.header--icons-container .header--basket-total {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  font-size: 12px;
+  color: #000;
+  line-height: 12px;
+  font-weight: 700;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}

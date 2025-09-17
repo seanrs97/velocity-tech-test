@@ -1,0 +1,49 @@
+{% doc %}
+  This snippet is used to render the items in the cart
+
+  It is included in the following files
+  - cart-drawer.liquid
+
+  USAGE EXAMPLE:
+  {% render 'cart-items' %}
+{% enddoc %}
+
+{% comment %}
+  note: A lot of the syntax here is not correct and I've left notes explaining what the real syntax should be where possible.
+  I wanted to ensure that there was content to display in the cart drawer for testing puroposes so I had to alter code in places.
+{% endcomment %}
+
+<div class="cart-items">
+  {% comment %} should be looping through cart items here {% endcomment %}
+  {% for item in collections['all'].products %}
+    {% liquid 
+      assign default_variant = item.selected_or_first_available_variant
+      assign default_variant_title = default_variant.title | downcase
+
+      assign show_variant_title = true
+      if default_variant_title == 'default title' or default_variant_title == ''
+        assign show_variant_title = false
+      endif
+    %}
+    <div class="cart-item">
+      <div class="cart-item--top-half">
+        {% render 'image', image: item.featured_image, class: 'cart-item--image' %}
+        <div class="cart-item--title-container">
+          <h3 class="cart-item--title">{{ item.title }}</h3>
+          {% if show_variant_title %}
+            <span class="cart-item--variant-title">
+              {{ default_variant.title }}
+            </span>
+          {% endif %}
+        </div>
+        <span class="cart-item--remove">
+          {% render 'icons', icon: 'bin' %}
+        </span>
+      </div>
+      <div class="cart-item--bottom-half">
+        {% render 'price', product: default_variant, class: 'cart-item--price' %}
+        {% render 'quantity', product: default_variant, class: 'cart-item--quantity' %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

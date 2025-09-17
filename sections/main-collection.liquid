@@ -1,0 +1,78 @@
+{% liquid 
+%}
+
+<div class="main-collection" style="background-color: {{ section.settings.background_color }};">
+  {% comment %} collection title / description {% endcomment %}
+  <div class="collection-header page-width">
+    {% if collection.title != blank %}
+      <h1 class="collection-header--title">{{ collection.title }}</h1>
+    {% endif %}
+    {% if collection.description != blank %}
+      <div class="collection-header--description">{{ collection.description }}</div>
+    {% endif %}
+  </div>
+  {% comment %} collection grid {% endcomment %}
+  <div class="collection-grid page-width">
+    {% paginate collection.products by section.settings.paginate_number %}
+      <div class="collection-grid--inner">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product, section_settings: section.settings %}
+        {% endfor %}
+      </div>
+    
+    {% endpaginate %}
+  </div>
+</div>
+
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  @media only screen and (min-width: 768px) {
+    .collection-grid--inner {
+      grid-template-columns: repeat({{ section.settings.desktop_columns }}, 1fr);
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "settings": 
+    [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "range",
+        "id": "paginate_number",
+        "label": "Products per page",
+        "info": "Number of products to show per page",
+        "min": 4,
+        "max": 36,
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "desktop_columns",
+        "info": "Number of columns on desktop (≥768px)",
+        "label": "Desktop columns",
+        "min": 1,
+        "max": 4,
+        "default": 4
+      },
+      {
+        "type": "header",
+        "content": "Product Card Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_box_shadow",
+        "label": "Show box shadow on product cards",
+        "default": true
+      }
+    ]
+}
+{% endschema %}

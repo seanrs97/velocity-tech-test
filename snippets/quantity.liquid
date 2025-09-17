@@ -1,0 +1,39 @@
+{% doc %}
+  This snippet is used to render a quantity input field
+
+  It is included in the following files
+  - product-card.liquid
+
+  @param {object} product - The product object
+  @param {string} [class] - Additional classes to add to the price element
+
+  USAGE EXAMPLE:
+  {% render 'quantity', product: product, class: 'product-quantity' %}
+{% enddoc %}
+
+<quantity-input class="{{ class }}" type="quantity-input">
+  <button
+    type="button"
+    class="minus"
+    name="minus"
+  >
+    <span class="icon">
+      {% render 'icons', icon: 'minus' %}
+    </span>
+  </button>
+  <input
+    type="number"
+    name="quantity"
+    value="1"
+    min="0"
+  />
+  <button
+    type="button"
+    class="plus"
+    name="plus"
+  >
+    <span class="icon">
+      {% render 'icons', icon: 'plus' %}
+    </span>
+  </button>
+</quantity-input>

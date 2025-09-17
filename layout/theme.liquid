@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{ shop.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <title>{{ shop.name }}</title>
+
+  <meta name="description" content="">
+
+  {% render 'stylesheets' %}
+  {% render 'fonts' %}
+
+  {{ content_for_header }}
+</head>
+
+<body>
+  {% section 'header' %}
+  {{ content_for_layout }}
+
+  {% if settings.enable_cart_drawer %}
+    {% render 'cart-drawer' %}
+  {% endif %}
+
+  <script src="{{ 'index.js' | asset_url }}" defer="defer"></script>
+</body>
+</html>

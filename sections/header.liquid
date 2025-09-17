@@ -1,0 +1,70 @@
+{% liquid 
+  assign logo = section.settings.logo
+%}
+
+<div class="header" style="background-color: {{ section.settings.background_color }};">
+  <div class="header--container page-width">
+    {% comment %} logo {% endcomment %}
+    {% if logo != blank %}
+      {% render 'image', image: logo, class: 'header--logo' %}
+    {% else %}
+      <span class="header--logo-backup">{{ shop.name }}</span>
+    {% endif %}
+
+    {% comment %} account / basket {% endcomment %}
+    <div class="header--icons-container">
+      <a href="{{ routes.account_url }}" class="icon header--account">
+        {% render 'icons', icon: 'account' %}
+      </a>
+
+      {% if settings.enable_cart_drawer %}
+        <span class="icon header--basket">
+      {% else %}
+        <a href="{{ routes.cart_url }}" class="icon header--basket"></a>
+      {% endif %}
+        {% render 'icons', icon: 'basket' %}
+        <span class="header--basket-total" style="background-color: {{ section.settings.basket_total_color }}">{{ cart.item_count }}</span>
+      {% if settings.enable_cart_drawer %}
+        </span>
+      {% else %}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "header",
+        "content": "Styling"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#1E3563"
+      },
+      {
+        "type": "color",
+        "id": "basket_total_color",
+        "label": "Basket total color",
+        "default": "#68DD7C",
+        "info": "Change the background color of the basket total in the header."
+      }
+    ]
+}
+{% endschema %}

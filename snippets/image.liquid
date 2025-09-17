@@ -1,0 +1,29 @@
+{% doc %}
+  Used to render an <img> element
+
+  @param {object} image - image object
+  @param {number} [height] - custom height for the image
+  @param {string} [class] - additional classes for the image element
+
+  USAGE EXAMPLE:
+  {% render 'image', image: product.featured_image, height: 500, class: 'product-image' %}
+{% enddoc %}
+
+{% if image != blank %}
+  {% liquid 
+    assign image_height = image.height | default: image.height 
+    assign image_height_2x = image.height | default: image.height | times: 2
+    assign image_height_3x = image.height | default: image.height | times: 3
+  %}
+
+  {% capture image_srcset %}
+    {{ image | image_url: height: image_height }} 1x,
+    {{ image | image_url: height: image_height_2x }} 2x,
+    {{ image | image_url: height: image_height_3x }} 3x
+  {% endcapture %}
+
+  {{ image | image_url: height: image_height | image_tag: class: class, srcset: image_srcset }}
+{% else %}
+  {{ 'image not available' }}
+{% endif %}
+

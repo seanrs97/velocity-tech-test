@@ -1,0 +1,38 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Skeleton theme",
+    "theme_version": "1.0.0",
+    "theme_author": "THEME_AUTHOR",
+    "theme_documentation_url": "https:\/\/THEME_DOCUMENTATION_URL.com\/",
+    "theme_support_url": "https:\/\/THEME_SUPPORT_URL.com\/"
+  },
+  {
+    "name": "Cart Drawer",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_cart_drawer",
+        "label": "Enable cart drawer",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_drawer_heading",
+        "label": "Cart drawer heading",
+        "default": "Your Basket",
+        "info": "Heading will default to 'Cart' if left blank"
+      },
+      {
+        "type": "header",
+        "content": "Cart Drawer Styling"
+      },
+      {
+        "type": "color",
+        "id": "cart_drawer_background_color",
+        "label": "Cart drawer background color",
+        "default": "#E9ECF0"
+      }
+    ]
+  }
+]
